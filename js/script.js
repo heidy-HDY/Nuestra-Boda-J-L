@@ -4,142 +4,120 @@
 
 const musica = document.getElementById("musica");
 
-
-/* =========================================
-   FUNCIÓN PARA ACTIVAR LA MÚSICA
-   ========================================= */
-
 function iniciarMusica() {
-
-    if (musica.paused) {
-
-        musica.play()
-            .catch(() => {
-                // El navegador puede bloquear el audio
-                // hasta que exista una interacción válida.
-            });
-
+    if (musica && musica.paused) {
+        musica.play().catch(() => {
+            // El navegador puede bloquear la reproducción
+            // hasta que la persona interactúe con la página.
+        });
     }
-
 }
 
+// Activar la música con la primera interacción
+document.addEventListener("click", iniciarMusica, { once: true });
 
-/* =========================================
-   PRIMERA INTERACCIÓN
-   ========================================= */
-
-/*
-   Al tocar cualquier parte de la invitación,
-   se intenta activar la música.
-*/
-
-document.addEventListener(
-    "click",
-    iniciarMusica,
-    { once: true }
-);
-
-
-/*
-   En celular, la primera interacción táctil
-   también puede activar la música.
-*/
-
-document.addEventListener(
-    "touchstart",
-    iniciarMusica,
-    { once: true }
-);
-
-
-/*
-   Si la persona hace scroll, también se intenta
-   activar la música.
-*/
-
-document.addEventListener(
-    "scroll",
-    iniciarMusica,
-    { once: true, passive: true }
-);
-
-
-/* =========================================
-   INTENTO DE AUTOPLAY AL CARGAR
-   ========================================= */
-
-window.addEventListener("load", function () {
-
-    iniciarMusica();
-
+document.addEventListener("touchstart", iniciarMusica, {
+    once: true,
+    passive: true
 });
 
+// Intentar reproducir al cargar la página
+window.addEventListener("load", iniciarMusica);
+
 
 /* =========================================
-   ZONAS CLICABLES SOBRE LA IMAGEN
+   ZONAS CLICABLES SOBRE LA INVITACIÓN
    ========================================= */
 
 const imagenInvitacion = document.querySelector(".invitacion-imagen");
 
 const zonasClicables = [
-    
     {
         nombre: "confirmar",
-        top:75.2,
+        top: 75.2,
         left: 41,
         width: 20,
         height: 3.5,
+
+        // IMPORTANTE:
+        // Este enlace todavía es el de la invitación
+        // de cumpleaños de Aarón. Cámbialo por el
+        // WhatsApp y mensaje de la boda.
         url: "https://wa.me/573102222051?text=%C2%A1Hola%21+Confirmo+mi+asistencia+al+cumple+de+Aar%C3%B3n%0A%0A%C2%A1Ah%C3%AD+estar%C3%A9+para+celebrar+su+primer+a%C3%B1ito%21"
     }
 ];
 
+if (imagenInvitacion) {
+    imagenInvitacion.addEventListener("click", function (e) {
+        const rect = imagenInvitacion.getBoundingClientRect();
 
-imagenInvitacion.addEventListener("click", function (e) {
+        const xPct = ((e.clientX - rect.left) / rect.width) * 100;
+        const yPct = ((e.clientY - rect.top) / rect.height) * 100;
 
-    const rect = imagenInvitacion.getBoundingClientRect();
+        for (const zona of zonasClicables) {
+            if (
+                xPct >= zona.left &&
+                xPct <= zona.left + zona.width &&
+                yPct >= zona.top &&
+                yPct <= zona.top + zona.height
+            ) {
+                const enlace = document.createElement("a");
 
-    const xPct = ((e.clientX - rect.left) / rect.width) * 100;
-    const yPct = ((e.clientY - rect.top) / rect.height) * 100;
+                enlace.href = zona.url;
+                enlace.target = "_blank";
+                enlace.rel = "noopener noreferrer";
 
-    for (const zona of zonasClicables) {
+                document.body.appendChild(enlace);
+                enlace.click();
+                enlace.remove();
 
-        if (
-            xPct >= zona.left &&
-            xPct <= zona.left + zona.width &&
-            yPct >= zona.top &&
-            yPct <= zona.top + zona.height
-        ) {
-
-            const enlace = document.createElement("a");
-
-            enlace.href = zona.url;
-            enlace.target = "_blank";
-            enlace.rel = "noopener noreferrer";
-
-            document.body.appendChild(enlace);
-            enlace.click();
-            enlace.remove();
-
-            return;
+                return;
+            }
         }
-    }
+    });
+}
 
-});
 
 /* =========================================
-   SOBRE DE BIENVENIDA
+   SOBRE, NOTA BÍBLICA E INVITACIÓN PRINCIPAL
    ========================================= */
 
 const sobre = document.getElementById("sobre");
+const notaBiblica = document.getElementById("nota-biblica");
 const invitacionCard = document.querySelector(".invitacion");
 
-sobre.addEventListener("click", function () {
+if (sobre && notaBiblica && invitacionCard) {
+    sobre.addEventListener("click", function () {
 
-    sobre.classList.add("abrir");
+        // Evitar que se active varias veces
+        if (sobre.classList.contains("abriendo")) {
+            return;
+        }
 
-    setTimeout(() => {
-        sobre.style.display = "none";
-        invitacionCard.classList.add("mostrar");
-    }, 800);
+        sobre.classList.add("abriendo");
+        sobre.classList.add("abrir");
 
-});
+        // Esperar a que termine la animación del sobre
+        setTimeout(() => {
+            sobre.style.display = "none";
+
+            // Mostrar la nota bíblica
+            notaBiblica.classList.remove("oculto");
+            notaBiblica.classList.add("mostrar");
+
+            // Mantener la nota visible durante 4 segundos
+            setTimeout(() => {
+                notaBiblica.classList.remove("mostrar");
+                notaBiblica.classList.add("oculto");
+
+                // Mostrar la invitación principal
+                invitacionCard.classList.add("mostrar");
+
+                // Intentar activar la música tras la interacción
+                iniciarMusica();
+
+            }, 2500);
+
+        }, 800);
+    });
+}
