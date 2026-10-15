@@ -119,7 +119,7 @@ if (sobre && notaBiblica && invitacionCard) {
                 // Intentar activar la música tras la interacción
                 iniciarMusica();
 
-            }, 5000);
+            }, 5200);
 
         }, 800);
     });
