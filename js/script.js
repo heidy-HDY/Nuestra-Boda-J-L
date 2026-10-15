@@ -33,17 +33,20 @@ const imagenInvitacion = document.querySelector(".invitacion-imagen");
 
 const zonasClicables = [
     {
-        nombre: "confirmar",
-        top: 75.2,
-        left: 41,
-        width: 20,
+        nombre: "ubicacion",
+        top: 58,
+        left: 32,
+        width: 36,
         height: 3.5,
-
-        // IMPORTANTE:
-        // Este enlace todavía es el de la invitación
-        // de cumpleaños de Aarón. Cámbialo por el
-        // WhatsApp y mensaje de la boda.
-        url: "https://wa.me/573102222051?text=%C2%A1Hola%21+Confirmo+mi+asistencia+al+cumple+de+Aar%C3%B3n%0A%0A%C2%A1Ah%C3%AD+estar%C3%A9+para+celebrar+su+primer+a%C3%B1ito%21"
+        url: "https://maps.app.goo.gl/Z9aefsGXtWVuWnjX8"
+    },
+    {
+        nombre: "confirmar",
+        top: 70,
+        left: 32,
+        width: 36,
+        height: 3.5,
+        url: "https://wa.me/573184253351?text=%C2%A1Hola!%20Confirmo%20mi%20asistencia%20a%20su%20Boda.%0A%0ASer%C3%A1%20un%20placer%20acompa%C3%B1arte%20en%20esta%20noche%20tan%20especial.%20%C2%A1Nos%20vemos%20para%20celebrar%20juntos!"
     }
 ];
 
