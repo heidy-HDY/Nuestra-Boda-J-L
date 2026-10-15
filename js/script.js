@@ -46,7 +46,7 @@ const zonasClicables = [
         left: 32,
         width: 36,
         height: 3.5,
-        url: "https://wa.me/573184253351?text=%C2%A1Hola!%20Confirmo%20mi%20asistencia%20a%20su%20Boda.%0A%0ASer%C3%A1%20un%20placer%20acompa%C3%B1arte%20en%20esta%20noche%20tan%20especial.%20%C2%A1Nos%20vemos%20para%20celebrar%20juntos!"
+        url: "https://wa.me/573184253351?text=%C2%A1Hola!%20Confirmo%20mi%20asistencia%20a%20su%20Boda.%0A%0ASer%C3%A1%20un%20placer%20acompa%C3%B1arlos%20en%20esa%20noche%20tan%20especial.%20%C2%A1Nos%20vemos%20para%20celebrar%20juntos!"
     }
 ];
 
