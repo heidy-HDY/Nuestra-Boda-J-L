@@ -34,19 +34,19 @@ const imagenInvitacion = document.querySelector(".invitacion-imagen");
 const zonasClicables = [
     {
         nombre: "ubicacion",
-        top: 58,
-        left: 32,
+        top: 57,
+        left: 33,
         width: 36,
-        height: 3.5,
+        height: 3,
         url: "https://maps.app.goo.gl/Z9aefsGXtWVuWnjX8"
     },
     {
         nombre: "confirmar",
-        top: 70,
-        left: 32,
-        width: 36,
-        height: 3.5,
-        url: "https://wa.me/573184253351?text=%C2%A1Hola!%20Confirmo%20mi%20asistencia%20a%20su%20Boda.%0A%0ASer%C3%A1%20un%20placer%20acompa%C3%B1arlos%20en%20esa%20noche%20tan%20especial.%20%C2%A1Nos%20vemos%20para%20celebrar%20juntos!"
+        top: 69.2,
+        left: 33,
+        width: 37,
+        height: 3.2,
+        url: "https://wa.me/573226723378?text=%C2%A1Hola!%20Confirmo%20mi%20asistencia%20a%20su%20Boda."
     }
 ];
 
